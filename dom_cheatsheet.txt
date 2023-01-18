@@ -1,0 +1,58 @@
+1)Validare un input con un event listener e aggiunta della classe "is-invalid" e una scritta sotto l'input :
+
+
+SOLO LETTERE
+
+ document.getElementById("name").addEventListener("blur", function(){
+ let name = document.getElementById("name").value;
+ let regex = /^[a-zA-Z ]+$/;
+ if(!regex.test(name)){
+ document.getElementById("name").classList.add("is-invalid");
+ document.getElementById("name").insertAdjacentHTML("afterend", "<div class='invalid-feedback'>Il campo non è valido</div>");
+ }else{
+ document.getElementById("name").classList.remove("is-invalid");
+ document.getElementById("name").nextElementSibling.remove();
+ }
+ });
+
+
+DATE
+
+ document.getElementById("date").addEventListener("blur", function(){
+ let date = document.getElementById("date").value;
+ let regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+ if(!regex.test(date)){
+ document.getElementById("date").classList.add("is-invalid");
+ document.getElementById("date").insertAdjacentHTML("afterend", "<div class='invalid-feedback'>Il campo non è valido</div>");
+ }else{
+ document.getElementById("date").classList.remove("is-invalid");
+ document.getElementById("date").nextElementSibling.remove();
+ }
+ });
+
+SOLO NUMERI (10 cifre in questo caso)
+
+ document.getElementById("phone-number").addEventListener("blur", function(){
+ let phone = document.getElementById("phone-number").value;
+ let regex = /^[0-9]{10}$/;
+ if(!regex.test(phone)){
+ document.getElementById("phone-number").classList.add("is-invalid");
+ document.getElementById("phone-number").insertAdjacentHTML("afterend", "<div class='invalid-feedback'>Il campo non è valido</div>");
+ }else{
+ document.getElementById("phone-number").classList.remove("is-invalid");
+ document.getElementById("phone-number").nextElementSibling.remove();
+ }
+ });
+
+
+2)Compilare un form facendo una chiamata API
+
+$.ajax({
+  url: 'your_url',
+  type: 'GET',
+  success: function(data) {
+    // data contiene i dati ricevuti dalla chiamata API
+    $('input[name="field_name"]').val(data.field);
+  }
+});
+
